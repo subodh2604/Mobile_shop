@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{% for mob in mobile%}
+<img src="{{mob.mobile_pic.url}}">
+{{mob.id}}
+<form action="{% url 'buy' mob.id %}" method="POST">
+    {% csrf_token %}
+    Quantity: <input type="number" name="quantity"><br>
+    address: <textarea name="address">Address</textarea><br>
+    <button type="submit" class="btn btn-primary">ORDER</button>
+</form>
+{% endfor %}

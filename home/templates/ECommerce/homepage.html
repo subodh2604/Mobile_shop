@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+ 
+    });
+  });
+  </script>
+
+  <style>
+.outer-mob {
+  display: inline;
+  position: absolute;
+  height: 405px;
+  width: 700px;
+  /*border:black solid ;*/
+
+}
+.inner-mob{
+  display:inline-block;
+  position: relative;
+  height:200px;
+  width:105px;
+  /*border:black solid ;*/
+}
+.inner-inner-mob{
+  display:block;
+  position: absolute;
+}
+img{
+  height: 170px;
+  width: 100px;
+  position: absolute;
+}
+  </style>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  {% if user.is_authenticated %}
+  Welcome,{{user.username}}
+  {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+     <img src="{% static 'osi.png'%}"><a class="navbar-brand" href="#">E-Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}">signup</a>
+            </li>
+            {% endif %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Products
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Mobiles</a>
+                <a class="dropdown-item" href="#">laptops</a>
+                <a class="dropdown-item" href="#">other electroics</a>
+              </div>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'carts' %}">cart</a>
+            </li>
+            <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">logout</a></li>
+            {% endif %}
+            <form class="form-inline" method="POST" action="{% url 'search' %}">
+              {% csrf_token %}
+              <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </ul>
+        </div>
+      </nav>
+      <h1>{{error}}</h1>
+      {% for mobile in m3 %}
+      <h1>Search results</h1>
+      <div class="inner-mob">
+        <div class="inner-inner-mob">
+         <a href="{% url 'specifications' mobile.id %}"><img src="{{mobile.mobile_pic.url}}"></a> 
+        </div>
+      </div>
+      {% endfor %}
+      
+    <br>
+      <div class="outer-mob">
+        {% for mobile in mobiles %}
+        <div class="inner-mob">
+          <div class="inner-inner-mob">
+           <a href="{% url 'specifications' mobile.id %}"><img src="{{mobile.mobile_pic.url}}"></a> 
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

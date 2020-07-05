@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{% for mobile in mlist %}
+{{mobile.model}}<br>
+<img src="{{mobile.mobile_pic.url}}"><br>
+{{mobile.discription}}<br>
+{{mobile.price}}<br>
+<form action="{}" method='POST'>
+    {% csrf_token %}
+   <button type="submit" class="btn btn-primary">BUY NOW</button>
+</form>
+<form action="{% url 'remove_from_cart' mobile.id %}" method='POST'>
+    {% csrf_token %}
+   <button type="submit" class="btn btn-primary">REMOVE</button>
+</form>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
